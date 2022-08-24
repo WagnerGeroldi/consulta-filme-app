@@ -15,8 +15,6 @@ export function Home() {
   const [initialFilm, setInitialFilm] = useState([] as any);
   const [searchFilms, setSearchFilms] = useState([] as any);
 
-  console.log(searchFilms);
-
   const { register, handleSubmit } = useForm();
 
   useEffect(() => {
