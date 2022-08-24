@@ -14,14 +14,12 @@ import { FavoriteNull } from "./FavoriteNull";
 export function Favorites() {
   const [films, setFilms] = useState([] as any);
 
-  useEffect(() => {
-    api
-      .get("/films/findFavorite/")
-      .then((res) => {
-        setFilms(res.data);
-      })
-      .catch();
-  }, [films]);
+  api
+    .get("/films/findFavorite/")
+    .then((res) => {
+      setFilms(res.data);
+    })
+    .catch();
 
   async function removeFavorite(imdbID: any) {
     await api
@@ -69,7 +67,7 @@ export function Favorites() {
                           >
                             Remover dos Favoritos
                           </button>
-                        </div>  
+                        </div>
                       </div>
                     </div>
                   </div>
