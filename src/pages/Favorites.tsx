@@ -25,6 +25,7 @@ export function Favorites() {
       .delete("/films/removeFavorite/" + imdbID)
       .then((res: any) => {
         toast.success(res.data.message);
+        setFilms(res.data.favoritesFilm);
       })
       .catch();
   }
@@ -48,7 +49,7 @@ export function Favorites() {
                   <div className="d-flex gap-2 justify-content-center ">
                     <div
                       className="card"
-                      style={{ width: 280 }}
+                      style={{ maxWidth: 250 }}
                       key={item.imdbID}
                     >
                       <Link to={`/details/${item.imdbID}`}>
@@ -59,14 +60,13 @@ export function Favorites() {
                         <h6 className="card-text">
                           Ano de Lançamento: {item.Year}
                         </h6>
-                        <div className="d-flex justify-content-center align-items-end">
-                          <button
-                            className="btn btn-primary"
-                            onClick={() => removeFavorite(item.imdbID)}
-                          >
-                            Remover dos Favoritos
-                          </button>
-                        </div>
+
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => removeFavorite(item.imdbID)}
+                        >
+                          Remover dos Favoritos
+                        </button>
                       </div>
                     </div>
                   </div>

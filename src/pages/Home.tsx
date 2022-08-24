@@ -16,7 +16,7 @@ export function Home() {
   const [searchFilms, setSearchFilms] = useState([] as any);
   const { register, handleSubmit } = useForm();
   const [searchData, setSearchData] = useState("");
-  const [pages, setPages] = useState() as any
+  const [pages, setPages] = useState() as any;
 
   useEffect(() => {
     fetch(`https://www.omdbapi.com/?apikey=e20d15b&s=avengers`)
@@ -24,7 +24,6 @@ export function Home() {
         response.json().then((data: any) => {
           setInitialFilm(data.Search);
           setPages(Math.ceil(data.totalResults / data.Search.length));
-          
         });
       })
       .catch((e: any) => console.log("Erro na consulta"));

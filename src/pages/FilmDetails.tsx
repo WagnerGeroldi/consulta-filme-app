@@ -23,18 +23,16 @@ export function FilmDetails() {
         });
       })
       .catch((e: any) => console.log("Erro"));
-  });
+  }, []);
 
   useEffect(() => {
     api
       .get("/films/findFavorite/" + id)
       .then((res: any) => {
-        console.log(res.data);
-        
         setFilmAlreadyFavorite(res.data.message);
       })
       .catch();
-  });
+  }, []);
 
   function addFavorite(item: any) {
     api
