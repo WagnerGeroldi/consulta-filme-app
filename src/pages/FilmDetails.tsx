@@ -39,6 +39,7 @@ export function FilmDetails() {
       .post("/films/favorite", item)
       .then((res: any) => {
         toast.success(res.data.message);
+        setFilmAlreadyFavorite(true)
       })
       .catch();
   }
