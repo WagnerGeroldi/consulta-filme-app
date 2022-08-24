@@ -21,7 +21,7 @@ export function Favorites() {
         setFilms(res.data);
       })
       .catch();
-  });
+  }, [films]);
 
   async function removeFavorite(imdbID: any) {
     await api
