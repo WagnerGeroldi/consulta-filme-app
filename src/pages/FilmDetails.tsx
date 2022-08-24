@@ -16,7 +16,7 @@ export function FilmDetails() {
   const [filmAlreadyFavorite, setFilmAlreadyFavorite] = useState();
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?apikey=e20d15b&i=${id}&plot=full`)
+    fetch(`https://www.omdbapi.com/?apikey=e20d15b&i=${id}&plot=full`)
       .then((response: any) => {
         response.json().then((data: any) => {
           setFilm(data);
