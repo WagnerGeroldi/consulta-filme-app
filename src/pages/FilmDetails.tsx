@@ -13,7 +13,7 @@ import "./FilmDetails.css";
 export function FilmDetails() {
   const { id } = useParams() as { id: string };
   const [film, setFilm] = useState([] as any);
-  const [filmAlreadyFavorite, setFilmAlreadyFavorite] = useState();
+  const [filmAlreadyFavorite, setFilmAlreadyFavorite] = useState() as any;
 
   useEffect(() => {
     fetch(`https://www.omdbapi.com/?apikey=e20d15b&i=${id}&plot=full`)
@@ -38,8 +38,8 @@ export function FilmDetails() {
     api
       .post("/films/favorite", item)
       .then((res: any) => {
-        toast.success(res.data.message);
         setFilmAlreadyFavorite(true)
+        toast.success(res.data.message);
       })
       .catch();
   }
