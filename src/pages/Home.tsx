@@ -17,7 +17,7 @@ export function Home() {
   const { register, handleSubmit } = useForm();
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?apikey=e20d15b&s=avengers&page=1`)
+    fetch(`https://www.omdbapi.com/?apikey=e20d15b&s=avengers&page=1`)
       .then((response: any) => {
         response.json().then((data: any) => {
           setInitialFilm(data.Search);
