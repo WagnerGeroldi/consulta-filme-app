@@ -9,10 +9,13 @@ import { useForm } from "react-hook-form";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { Footer } from "./components/Footer";
+import { PageNotResult } from "./PageNotResult";
 
 export function Home() {
   const [initialFilm, setInitialFilm] = useState([] as any);
   const [searchFilms, setSearchFilms] = useState([] as any);
+
+  console.log(searchFilms);
 
   const { register, handleSubmit } = useForm();
 
@@ -60,7 +63,9 @@ export function Home() {
               </button>
             </form>
           </div>
-          {searchFilms.length === 0 ? (
+          {searchFilms === undefined ? (
+            <PageNotResult />
+          ) : searchFilms.length === 0 ? (
             <>
               <div className="mt-5 d-flex justify-content-center">
                 <h3>Sugestão do dia</h3>
@@ -109,13 +114,14 @@ export function Home() {
                   </Link>
                 ))}
               </div>
-              <div className=" d-flex justify-content-center m-4 ">
-                <Stack>
-                  <Pagination count={10} />
-                </Stack>
-              </div>
             </>
           )}
+
+          <div className=" d-flex justify-content-center m-4 ">
+            <Stack>
+              <Pagination count={10} />
+            </Stack>
+          </div>
         </div>
         <Footer />
       </main>
