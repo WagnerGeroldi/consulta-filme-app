@@ -1,0 +1,16 @@
+.config {
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 750px) {
+  .config {
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  .config img {
+    max-width: 300px;
+    margin: auto;
+  }
+}
