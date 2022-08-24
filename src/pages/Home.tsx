@@ -14,18 +14,17 @@ import { PageNotResult } from "./PageNotResult";
 export function Home() {
   const [initialFilm, setInitialFilm] = useState([] as any);
   const [searchFilms, setSearchFilms] = useState([] as any);
-
   const { register, handleSubmit } = useForm();
 
-  useEffect(() => {
+ useEffect(() => {
     fetch(`https://www.omdbapi.com/?apikey=e20d15b&s=avengers&page=1`)
       .then((response: any) => {
         response.json().then((data: any) => {
           setInitialFilm(data.Search);
         });
       })
-      .catch((e: any) => console.log("Erro"));
-  });
+      .catch((e: any) => console.log("Erro na consulta"));
+  }, []);
 
   const searchFilm = (data: any) => {
     api
