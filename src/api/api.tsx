@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:3333";
+const baseURL = "https://apifilmesbackend.herokuapp.com/";
 
 const api = axios.create({
   baseURL: baseURL,
