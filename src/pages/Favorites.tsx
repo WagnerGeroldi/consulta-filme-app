@@ -5,9 +5,6 @@ import { api } from "../api/api";
 import { Head } from "./components/Head";
 import { Header } from "./components/Header";
 import { ToastContainer, toast } from "react-toastify";
-
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 import { Footer } from "./components/Footer";
 import { FavoriteNull } from "./FavoriteNull";
 
@@ -74,11 +71,6 @@ export function Favorites() {
                     </div>
                   </div>
                 ))}
-              </div>
-              <div className=" d-flex justify-content-center m-4 ">
-                <Stack>
-                  <Pagination count={10} />
-                </Stack>
               </div>
             </>
           )}

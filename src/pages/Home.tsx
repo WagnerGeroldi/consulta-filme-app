@@ -15,24 +15,51 @@ export function Home() {
   const [initialFilm, setInitialFilm] = useState([] as any);
   const [searchFilms, setSearchFilms] = useState([] as any);
   const { register, handleSubmit } = useForm();
+  const [searchData, setSearchData] = useState("");
+  const [pages, setPages] = useState() as any
 
- useEffect(() => {
-    fetch(`https://www.omdbapi.com/?apikey=e20d15b&s=avengers&page=1`)
+  useEffect(() => {
+    fetch(`https://www.omdbapi.com/?apikey=e20d15b&s=avengers`)
+      .then((response: any) => {
+        response.json().then((data: any) => {
+          setInitialFilm(data.Search);
+          setPages(Math.ceil(data.totalResults / data.Search.length));
+          
+        });
+      })
+      .catch((e: any) => console.log("Erro na consulta"));
+  }, []);
+
+  const handleChangePaginationSearch = (e: any, p: any) => {
+    fetch(
+      `https://www.omdbapi.com/?apikey=e20d15b&s=${searchData}&page=${p}`
+    ).then((response: any) => {
+      response.json().then((data: any) => {
+        setSearchFilms(data.Search);
+      });
+    });
+  };
+
+  const searchFilm = (data: any) => {
+    setSearchData(data.search);
+    fetch(`https://www.omdbapi.com/?apikey=e20d15b&s=${data.search}`).then(
+      (response: any) => {
+        response.json().then((data: any) => {
+          setSearchFilms(data.Search);
+          setPages(Math.ceil(data.totalResults / data.Search.length));
+        });
+      }
+    );
+  };
+
+  const handleChangePagination = (e: any, p: any) => {
+    fetch(`https://www.omdbapi.com/?apikey=e20d15b&s=avengers&page=${p}`)
       .then((response: any) => {
         response.json().then((data: any) => {
           setInitialFilm(data.Search);
         });
       })
       .catch((e: any) => console.log("Erro na consulta"));
-  }, []);
-
-  const searchFilm = (data: any) => {
-    api
-      .post("/films/search", data)
-      .then((res) => {
-        setSearchFilms(res.data.data.Search);
-      })
-      .catch();
   };
 
   return (
@@ -86,6 +113,15 @@ export function Home() {
                   </Link>
                 ))}
               </div>
+              <div className=" d-flex justify-content-center m-4 ">
+                <Stack>
+                  <Pagination
+                    count={pages}
+                    color="primary"
+                    onChange={handleChangePagination}
+                  />
+                </Stack>
+              </div>
             </>
           ) : (
             <>
@@ -111,14 +147,17 @@ export function Home() {
                   </Link>
                 ))}
               </div>
+              <div className=" d-flex justify-content-center m-4 ">
+                <Stack>
+                  <Pagination
+                    count={pages}
+                    color="primary"
+                    onChange={handleChangePaginationSearch}
+                  />
+                </Stack>
+              </div>
             </>
           )}
-
-          <div className=" d-flex justify-content-center m-4 ">
-            <Stack>
-              <Pagination count={10} />
-            </Stack>
-          </div>
         </div>
         <Footer />
       </main>
